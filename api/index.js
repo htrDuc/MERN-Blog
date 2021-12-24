@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const authRoute = require("./routes/auth")
 const usersRoute = require("./routes/user")
 const postRoute = require("./routes/post")
+const categoryRoute = require("./routes/category")
 dotenv.config();
 app.use(express.json()); //de nhan dc file json
 
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_URL)
 app.use("/api/auth", authRoute)
 app.use("/api/users", usersRoute)
 app.use("/api/post", postRoute)
+app.use("/api/category", categoryRoute)
 
 app.listen(5000, () => {
     console.log("Backend is running")
