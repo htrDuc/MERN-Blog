@@ -7,14 +7,14 @@ const PostSchema = new mongoose.Schema({
             unique: true
         },
         desc: {type: String, required: true},
-        photo: {type: String, required: true},
+        photo: {type: String, required: false},
         username: {
             type: String,
             required: true
         },
         categories :{
             type: Array,
-            required: true
+            required: false
         }
     }, {timestamps: true} // createdate, updatedate
 );
