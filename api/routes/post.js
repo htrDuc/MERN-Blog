@@ -67,7 +67,9 @@ router.get("/:id", async (req, res) => {
 //GET ALL POST
 router.get("/", async (req, res) => {
     const username = req.query.user; //get theo username
-    const catName = req.query.catName; //get theo name category
+    const catName = req.query.cat;
+    console.log(catName)//get theo name category
+    console.log(username)//get theo name category
     try {
         let posts;
         if (username) {

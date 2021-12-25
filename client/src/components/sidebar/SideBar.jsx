@@ -1,7 +1,18 @@
-import { Link, Router } from "react-router-dom";
+import {Link, Router} from "react-router-dom";
 import "./sidebar.css";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function SideBar() {
+    const [cats, setCat] = useState([]);
+
+    useEffect(() => {
+        const getCats = async () => {
+            const res = await axios.get("/categories")
+            setCat(res.data);
+        }
+        getCats()
+    }, [])
     return (
         <div className="sidebar">
             <div className="sidebarItem">
@@ -18,37 +29,16 @@ export default function SideBar() {
             <div className="sidebarItem">
                 <span className="sidebarTitle">CATEGORIES</span>
                 <ul className="sidebarList">
-                    <li className="sidebarListItem">
-                        <Link className="link" to="/posts?cat=Life">
-                            Life
-                        </Link>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Link className="link" to="/posts?cat=Music">
-                            Music
-                        </Link>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Link className="link" to="/posts?cat=Sport">
-                            Sport
-                        </Link>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Link className="link" to="/posts?cat=Style">
-                            Style
-                        </Link>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Link className="link" to="/posts?cat=Tech">
-                            Tech
-                        </Link>
-                    </li>
-                    <li className="sidebarListItem">
-                        <Link className="link" to="/posts?cat=Cinema">
-                            Cinema
-                        </Link>
-                    </li>
+                    {
+                        cats.map((cat) => (
+                            <li key={cat._id} className="sidebarListItem">
+                                <Link className="link" to={`/?cat=${cat.name}`}>
+                                    {cat.name}
+                                </Link>
+                            </li>
 
+                        ))
+                    }
                 </ul>
             </div>
             <div className="sidebarItem">
